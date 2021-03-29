@@ -58,5 +58,3 @@ const getBeerValue = (beer, field) => {
 ```
 
 Unfortunately, not every single beer would return the proper value, so if the value I wanted did not exist, I would display nothing by returning 0. 
-
-# bbb
