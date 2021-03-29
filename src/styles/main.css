@@ -1,0 +1,205 @@
+body {
+    background-image: url('../images/beer-table.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.box {
+  box-shadow: 7px 7px 6px #4b4b4b;
+}
+
+.bbb {
+  position: relative;
+    margin: auto;
+    width: 300px;
+    background-color: rgb(249, 207, 71);
+    padding: 5px 0px;
+    text-align: center;
+    font-size: 32px;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+.graph-background {
+    width: 90%;
+    padding: 25px 0px;
+    /* margin: 10px auto; */
+    /* margin-left: 10%;
+     */
+    margin: auto;
+    background-color: transparent;
+    border-radius: 20px;
+    animation: slowFadeIn 2.5s;
+}
+
+.beer-info {
+    display: flex;
+    justify-content: center;
+}
+
+select {
+    background-color: #ffdf2b;
+}
+
+.graph {
+    position: relative;
+    background-color: #ebe1a7;
+    padding: 0px 20px;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    opacity: 1;
+    height: 535px;
+    max-height: 535px;
+}
+
+#beer-drpdwn {
+    width: 20%;
+    padding: 5px 10px;
+    position: relative;
+    /* top: -35px; */
+    top: 45px;
+}
+
+#beer-drpdwn:hover {
+    cursor: pointer;
+}
+
+.beer-list-wrapper {
+    background-color: rgb(228, 198, 159);
+}
+
+#beer-list-title {
+  margin-top: 5px;
+}
+
+#beer-list {
+  list-style-type: none;
+  padding-left: 0;
+  position: relative;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-color: black white;
+}
+
+.beer-item {
+  font-size: 16px;
+  text-indent: -0.8em;
+  margin-left: 2em;
+  opacity: 0;
+  animation: fadeIn 1s 1;
+  animation-fill-mode: forwards;
+}
+
+.new-beer {
+  text-indent: -0.8em;
+  margin-left: 2em;
+}
+
+#beer-btn {
+    position: relative;
+}
+
+.aside-box {
+  position: relative;
+    height: fit-content;
+    padding: 5px 15px 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    width: 225px;
+}
+
+#description {
+    padding-top: 10px;
+    background-color: rgb(220, 182, 29);
+    line-height: 22px;
+}
+
+.desc-title, .desc-range {
+    font-weight: 700;
+}
+
+.desc-title {
+    font-size: 20px;
+}
+
+.graph-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.axis-label {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.x-axis-value {
+    font-size: 12px;
+}
+
+.fa-minus-circle {
+    padding-right: 10px;
+    color: black;
+    transition: color 0.25s;
+}
+
+.fa-minus-circle:hover {
+    cursor: pointer;
+    color: red;
+}
+
+/* .beer-item span::first-line {
+  margin-left: -10px;
+} */
+
+.delete-beer {
+    opacity: 1;
+    animation: fadeOut 1s 1;
+}
+
+.about-links {
+    position: absolute;
+    bottom: -56px;
+    right: 0px;
+    padding: 10px 15px;
+    background-color: rgb(230, 204, 58);
+    border-radius: 10px;
+}
+
+.about-links a {
+    text-decoration: none;
+}
+
+.about-links .fab {
+    color: black;
+    font-size: 28px;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.about-links .fab:hover {
+  opacity: 0.5;
+}
+
+.about-links .fab:last-child {
+  margin-left: 5px;
+}
+
+
+
+@keyframes fadeIn {
+    0% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1.0; }
+    100% { opacity: 0.0; }
+}
+
+@keyframes slowFadeIn {
+    0% { opacity: 0 }
+    35% { opacity: 0 }
+    100% { opacity: 1 }
+}

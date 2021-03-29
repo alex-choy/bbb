@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta tags for LinkedIn  -->
+    <meta property="og:title" content="Better Beer Bureau">
+    <meta property="og:image" content="./src/images/bbb.png">
+    <meta property="og:description" content="Interactive bar chart to compare different beers">
+    <meta property="og:url" content="https://alex-choy.github.io/better-beer-bureau/">
+
+    <script src="bundle.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
+    <title>BBB</title>
+</head>
+<body>
+    <header>
+        <h1 class="bbb box">BetterBeerBureau</h1>
+        <div class="instruction-div">
+          <button id="instructions" class="instr-btn">How to use this site</button>
+          <button id="hide-instructions" class="hide instr-btn">Hide instructions</button>
+        </div>
+    </header>
+    <section class="graph-background">
+        <section class="beer-info">
+            <aside>
+                <section class="beer-list-wrapper aside-box box">
+                    
+                    <h3 id="beer-list-title">
+                        Beers on Display
+                    </h3>
+                    <ul id="beer-list"></ul>
+                    <section id="remove-instr" class="beer-list-instr instructions-container">Click on <i class="fas fa-minus-circle"></i> to remove a beer from the list</section>
+                    <button id="beer-btn" >+ Add Random Beer</button>
+                    <section class="beer-list-instr instructions-container">Click on the button to add a beer to the list</section>
+                </section>
+                <section id="description"  class="aside-box box">
+                </section>
+            </aside>
+            <section class="graph box">
+                <section id="attr-instr" class="instructions-container">Click on the dropdown to change the beer attribute to compare</section>
+                <section id="hover-instr" class="instructions-container">Hover over the bars to see the value of this beer</section>
+                <select id="beer-drpdwn"></select>
+                <svg id="beer-bar"></svg>
+                  <section class="about-links box">
+                    <a 
+                      href="https://github.com/alex-choy"        target="_blank">
+                      <i class="fab fa-github"></i>
+                    </a>
+                    <a 
+                      href="https://www.linkedin.com/in/alexchoy179/" target="_blank">
+                      <i class="fab fa-linkedin-in"></i>
+                    </a>
+                  </section>
+            </section>
+        </section>
+    </section>
+</body>
+</html>
