@@ -222,6 +222,7 @@ const addBars = (bars, newAttrs, xScale, yScale, height, tooltip) => {
     .attr("x", (beer) => xScale(smallerBeerName(beer.name)))
     .attr("y", (beer) => {
       const beerValue = getBeerValue(beer, newAttrs.beerValue);
+      console.log(newAttrs.beerValue);
       return yScale(beerValue);
     })
     .attr("height", (beer) => {
@@ -305,7 +306,7 @@ const getBeerValue = (beer, field) => {
     }
     return parseFloat(beer[field]);
   } else if (beer.style) {
-    // Min/Max vals are packaged inside beer.style
+    // Min/Max vals are packaged inside beer.style (abvMin, srvMax, etc)
     const min = field + "Min",
       max = field + "Max";
     const minVal = parseFloat(beer.style[min]),

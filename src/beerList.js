@@ -2,6 +2,7 @@ import * as Beer from './beers';
 import { BEER_API_URL, PROXY_URL } from './index';
 import { breweryAPIKey } from "./config/keys_dev";
 const READY = 4;
+const beerDb = require('./beerDB.json');
 
 /**
  * Delete a beer from the current list
@@ -126,27 +127,45 @@ const insertNewBeer = (newBeer, updateBeerBarChart) => {
  * @param {function} updateBeerBarChart function to call after we get a beer
  * @param {number} numBeers number of beers to get  
  */
+// export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
+//     const req = new XMLHttpRequest();
+//     req.onreadystatechange = function () {
+//       if (this.readyState == READY && this.status == 200) {
+//         const newBeers = JSON.parse(this.responseText).data;
+//         // We only get more than 1 beer on initialization
+//         if(numBeers > 1) {
+//             setInitBeerList(newBeers, updateBeerBarChart);
+//         } else { // Otherwise, add one beer to the list/chart
+//             insertNewBeer(newBeers[0], updateBeerBarChart);
+//         }
+//       }
+//     };
+//     const apiCall = `${PROXY_URL}${BEER_API_URL}beers/?${breweryAPIKey}&order=random&randomCount=${numBeers}`;
+//     req.open('GET', apiCall);
+//     req.send();
+// };
+
 export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
-    const req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-      if (this.readyState == READY && this.status == 200) {
-        const newBeers = JSON.parse(this.responseText).data;
-        // We only get more than 1 beer on initialization
-        if(numBeers > 1) {
-            setInitBeerList(newBeers, updateBeerBarChart);
-        } else { // Otherwise, add one beer to the list/chart
-            insertNewBeer(newBeers[0], updateBeerBarChart);
-        }
-      }
-    };
-    const apiCall = `${PROXY_URL}${BEER_API_URL}beers/?${breweryAPIKey}&order=random&randomCount=${numBeers}`;
-    req.open('GET', apiCall);
-    req.send();
+  for(let beer in beerDb) {
+    console.log(beerDb[beer]);
+    insertNewBeer(beerDb[beer], updateBeerBarChart);
+  }
+  
 };
 
 // TODO: change the above funciton
 // Add 20 beers to a json file
 // Limit amount of beers to 10 on the graph
+// How to format the beer json? 
+/**
+ * beer: {
+ *    srm: '30',
+ *    abv: '20',
+ *    ibu: '100',
+ *    name: 'Arrogant Bastard'
+ *    id: 1
+ * }
+ */
 
 export const initBeerList = (updateBeerBarChart) => {
     getRandomBeers(updateBeerBarChart, 4);
