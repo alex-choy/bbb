@@ -1,14 +1,22 @@
 /**
- *  This is the Beer 'database'
+ *  This is the Beer datbase controller
  *  Allows adding/deleting beer 
  */
 
  const unsortedBeers = require('./beers.json');
 
+/**
+ * Delete beer from beers.json
+ * @param {*} beerId 
+ */
 export const deleteBeer = (beerId) => {
     delete unsortedBeers[beerId];
 };
 
+/**
+ * Add beer to the beers.json file
+ * @param {*} beer 
+ */
 export const addBeer = (beer) => {
     unsortedBeers[beer.id] = beer;
     // console.log(unsortedBeers[beer.id]);

@@ -3,8 +3,7 @@ import "./styles/search-beer.css";
 import "./styles/instructions.css";
 import * as d3 from "d3";
 import { BEER_ATTRS } from "./beerAttrs";
-import { initBeerList, sortBeerList, getRandomBeer } from "./beerList";
-import { beers } from "./beers";
+import { initBeerList } from "./beerList";
 const TOOLTIP_HEIGHT_OFFSET = 70;
 const TOOLTIP_WIDTH_OFFSET = 10;
 const UPDATE_TRANSITION_TIME = 1000;
@@ -37,51 +36,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const yAxis = beerSvg.append("g").call(d3.axisLeft(yScale));
 
   // x-axis scale for beer names
-  const xScale = d3
-    .scaleBand()
-    .range([0, width])
-    .domain(beers.map((beer) => smallerBeerName(beer.name)))
-    .padding(0.2);
-  const xAxis = beerSvg
-    .append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(xScale));
+  const xScale = d3.scaleBand()
+      .range([0, width])
+      .domain(beers.map((beer) => smallerBeerName(beer.name)))
+      .padding(0.2);
+  const xAxis = beerSvg.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(xScale));
 
   // horizontal lines across graph
-  const horizLines = beerSvg
-    .append("g")
-    .attr("class", "grid")
-    .style("color", "	#505050")
-    .call(d3.axisLeft().scale(yScale).tickSize(-width, 0, 0).tickFormat(""));
+  const horizLines = beerSvg.append("g")
+      .attr("class", "grid")
+      .style("color", "	#505050")
+      .call(d3.axisLeft().scale(yScale).tickSize(-width, 0, 0).tickFormat(""));
 
   // Tooltip to follow cursor on hover
-  const tooltip = d3
-    .select("body")
-    .append("div")
-    .attr("class", "tooltip")
-    .style("position", "absolute")
-    .style("background", "burlywood")
-    .style("padding", "10px")
-    .style("border-radius", "5px")
-    .style("opacity", 0);
+  const tooltip = d3.select("body")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("background", "burlywood")
+      .style("padding", "10px")
+      .style("border-radius", "5px")
+      .style("opacity", 0);
 
   // x-axis label
-  const xLabel = beerSvg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", height + X_LABEL_HEIGHT_OFFSET)
-    .attr("text-anchor", "middle")
-    .attr("class", "axis-label")
-    .text("Beer Names");
+  const xLabel = beerSvg.append("text")
+      .attr("x", width / 2)
+      .attr("y", height + X_LABEL_HEIGHT_OFFSET)
+      .attr("text-anchor", "middle")
+      .attr("class", "axis-label")
+      .text("Beer Names");
 
   // Title of graph
-  const graphTitle = beerSvg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", -20)
-    .attr("class", "graph-title")
-    .attr("text-anchor", "middle")
-    .text("ABV of Different Beers");
+  const graphTitle = beerSvg.append("text")
+      .attr("x", width / 2)
+      .attr("y", -20)
+      .attr("class", "graph-title")
+      .attr("text-anchor", "middle")
+      .text("ABV of Different Beers");
 
   /**
    *
@@ -158,11 +151,17 @@ const smallerBeerName = (beerName) => {
 /**
  * Adds bars to the bar graph that calls this function
  * @param {d3 object} bars
+ *            D3 rectangular bars to display on graph
  * @param {object} newAttrs
+ *            Beer attribute to display (ABV, IBU, SRM)
  * @param {d3 scale} xScale
+ *            X-axis scale
  * @param {d3 scale} yScale
+ *            Y-axis scale
  * @param {number} height
+ *            Max height of the bars
  * @param {html element} tooltip
+ *            Floating box that appears when hovering a bar on the graph
  */
 const addBars = (bars, newAttrs, xScale, yScale, height, tooltip) => {
   // mouse events to append to bars
@@ -252,6 +251,8 @@ const initValueDropdownList = (updateBeerBarChart) => {
     option.text = BEER_ATTRS[beerAttr].yTitle;
     beerDrpdwn.appendChild(option);
   }
+
+  // Displays the beer attribute to whatever is in the dropdown 
   beerDrpdwn.addEventListener("change", function (value) {
     const beerValue = this.options[this.selectedIndex].value;
     updateBeerBarChart(BEER_ATTRS[beerValue]);

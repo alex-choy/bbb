@@ -1,5 +1,4 @@
 import * as Beer from './beers';
-import { breweryAPIKey } from "./config/keys_dev";
 
 const READY = 4;
 const beerDb = require('./beerDB.json');
@@ -29,7 +28,7 @@ export const sortBeerList = () => {
         lis.push(li);
     })
 
-    lis.sort(function (li1, li2){
+    lis.sort(function (li1, li2) {
         const text1 =  li1.childNodes[1].textContent.toUpperCase();
         const text2 = li2.childNodes[1].textContent.toUpperCase();
         if(text1 < text2) {
@@ -99,8 +98,8 @@ const setInitBeerList = (beers, updateBeerBarChart) => {
 };
 
 /**
- * Get a random beer that isn't on display
- * @returns A random beer that is currently not displayed
+ * Get a random beer that isn't currently display
+ * @returns A random beer that is not currently displayed
  */
 const getRandomBeer = () => {
     let possibleNumberOfBeers = Object.keys(beerDb).length;
@@ -152,13 +151,6 @@ const insertNewBeer = (updateBeerBarChart) => {
  * @param {number} numBeers number of beers to get  
  */
 export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
-  // add artificial delay, gives time for D3 to load the bars on screen
-  // setTimeout(function() {
-  //   for(let beer in beerDb) {
-  //     insertNewBeer(beerDb[beer], updateBeerBarChart);
-  //   }
-  // }, 0);
-
   if(numBeers == 1) {
     insertNewBeer(updateBeerBarChart);
   } else {
@@ -167,20 +159,6 @@ export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
 
   
 };
-
-// TODO: change the above funciton
-// Add 20 beers to a json file
-// Limit amount of beers to 10 on the graph
-// How to format the beer json? 
-/**
- * beer: {
- *    srm: '30',
- *    abv: '20',
- *    ibu: '100',
- *    name: 'Arrogant Bastard'
- *    id: 1
- * }
- */
 
 export const initBeerList = (updateBeerBarChart) => {
     getRandomBeers(updateBeerBarChart, 4);
