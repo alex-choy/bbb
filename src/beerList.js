@@ -144,6 +144,10 @@ export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
     req.send();
 };
 
+// TODO: change the above funciton
+// Add 20 beers to a json file
+// Limit amount of beers to 10 on the graph
+
 export const initBeerList = (updateBeerBarChart) => {
     getRandomBeers(updateBeerBarChart, 4);
     const beerBtn = document.getElementById("beer-btn");
