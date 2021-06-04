@@ -4,7 +4,7 @@
     "abv": "5.4",
     "srm": "5",
     "ibu": "9",
-    "name": "Blue Moon"
+    "name": "Blue Moon Belgian White"
   },
   "2": {
     "id": 2,
@@ -18,13 +18,63 @@
     "abv": "5.6",
     "srm": "8",
     "ibu": "50",
-    "name": "Sierra Nevada"
+    "name": "Sierra Nevada Pale Ale"
   },
   "4": {
     "id": 4,
     "abv": "5.5",
-    "srm": "75",
-    "ibu": "27",
-    "name": "Nitro Merlin"
+    "srm": "27",
+    "ibu": "75",
+    "name": "Nitro Merlin Stout"
+  },
+  "5": {
+    "id": 5,
+    "abv": "4.2",
+    "srm": "36",
+    "ibu": "45",
+    "name": "Guinness"
+  },
+  "6": {
+    "id": 6,
+    "abv": "7",
+    "srm": "7",
+    "ibu": "66",
+    "name": "Grapefruit Sculpin"
+  },
+  "7": {
+    "id": 7,
+    "abv": "7.5",
+    "srm": "12",
+    "ibu": "76",
+    "name": "Scorpion Bowl IPA"
+  },
+  "8": {
+    "id": 8,
+    "abv": "8.5",
+    "srm": "11",
+    "ibu": "60",
+    "name": "Fear Movie Lions Double IPA"
+  },
+  "9": {
+    "id": 9,
+    "abv": "10",
+    "srm": "38",
+    "ibu": "60",
+    "name": "Victory at Sea Imperial Porter"
+  },
+  "10": {
+    "id": 10,
+    "abv": "6",
+    "srm": "36",
+    "ibu": "47",
+    "name": "Mocha Marlin Stout"
+  },
+  "11": {
+    "id": 11,
+    "abv": "7.3",
+    "srm": "17",
+    "ibu": "70",
+    "name": "Habanero Sculpin IPA"
   }
+
 }

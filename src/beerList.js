@@ -1,8 +1,9 @@
 import * as Beer from './beers';
-import { BEER_API_URL, PROXY_URL } from './index';
 import { breweryAPIKey } from "./config/keys_dev";
+
 const READY = 4;
 const beerDb = require('./beerDB.json');
+const displayedBeers = require('./beers.json');
 
 /**
  * Delete a beer from the current list
@@ -84,17 +85,40 @@ const createBeerElement = (beer, updateBeerBarChart) => {
  */
 const setInitBeerList = (beers, updateBeerBarChart) => {
     const beerListUl = document.getElementById("beer-list");
-    beers.forEach(beer => {
-        const beerEle = createBeerElement(beer, updateBeerBarChart);
-        beerListUl.appendChild(beerEle);
+    // Create artificial delay, give D3 time to process the data
+    setTimeout(function() {
+      // IDs start at 1
+      for(let i = 1; i <= 4; i++) {
+          const beerEle = createBeerElement(beers[i], updateBeerBarChart);
+          beerListUl.appendChild(beerEle);
+      };
+      updateBeerBarChart();
+      sortBeerList();
+    }, 0);
+    
+};
+
+/**
+ * Get a random beer that isn't on display
+ * @returns A random beer that is currently not displayed
+ */
+const getRandomBeer = () => {
+    let possibleNumberOfBeers = Object.keys(beerDb).length;
+    const displayedBeerIds = new Set();
+    displayedBeers.forEach((beer) => {
+      displayedBeerIds.add(beer.id);
     });
 
-    updateBeerBarChart();
-    sortBeerList();
+    let currentId = parseInt(Math.random() * possibleNumberOfBeers + 1);
+    while(displayedBeerIds.has(currentId)) {
+      currentId = parseInt(Math.random() * possibleNumberOfBeers + 1);
+    }
+    return beerDb[currentId];
 };
 
 
-const insertNewBeer = (newBeer, updateBeerBarChart) => {
+const insertNewBeer = (updateBeerBarChart) => {
+    const newBeer = getRandomBeer();
     // New beer
     const beerEle = createBeerElement(newBeer, updateBeerBarChart);
     beerEle.className = "new-beer";
@@ -127,29 +151,20 @@ const insertNewBeer = (newBeer, updateBeerBarChart) => {
  * @param {function} updateBeerBarChart function to call after we get a beer
  * @param {number} numBeers number of beers to get  
  */
-// export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
-//     const req = new XMLHttpRequest();
-//     req.onreadystatechange = function () {
-//       if (this.readyState == READY && this.status == 200) {
-//         const newBeers = JSON.parse(this.responseText).data;
-//         // We only get more than 1 beer on initialization
-//         if(numBeers > 1) {
-//             setInitBeerList(newBeers, updateBeerBarChart);
-//         } else { // Otherwise, add one beer to the list/chart
-//             insertNewBeer(newBeers[0], updateBeerBarChart);
-//         }
-//       }
-//     };
-//     const apiCall = `${PROXY_URL}${BEER_API_URL}beers/?${breweryAPIKey}&order=random&randomCount=${numBeers}`;
-//     req.open('GET', apiCall);
-//     req.send();
-// };
-
 export const getRandomBeers = (updateBeerBarChart, numBeers = 1) => {
-  for(let beer in beerDb) {
-    console.log(beerDb[beer]);
-    insertNewBeer(beerDb[beer], updateBeerBarChart);
+  // add artificial delay, gives time for D3 to load the bars on screen
+  // setTimeout(function() {
+  //   for(let beer in beerDb) {
+  //     insertNewBeer(beerDb[beer], updateBeerBarChart);
+  //   }
+  // }, 0);
+
+  if(numBeers == 1) {
+    insertNewBeer(updateBeerBarChart);
+  } else {
+    setInitBeerList(beerDb, updateBeerBarChart);
   }
+
   
 };
 

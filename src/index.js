@@ -1,10 +1,7 @@
 import "./styles/main.css";
 import "./styles/search-beer.css";
 import "./styles/instructions.css";
-// alert("connected js");
-import { breweryAPIKey } from "./config/keys_dev";
 import * as d3 from "d3";
-import { transition } from "d3";
 import { BEER_ATTRS } from "./beerAttrs";
 import { initBeerList, sortBeerList, getRandomBeer } from "./beerList";
 import { beers } from "./beers";
@@ -13,11 +10,8 @@ const TOOLTIP_WIDTH_OFFSET = 10;
 const UPDATE_TRANSITION_TIME = 1000;
 const X_LABEL_HEIGHT_OFFSET = 120;
 const MAX_BEER_NAME_LENGTH = 12;
-const MAX_NUM_DISPLAYED_BEERS = 12;
+const MAX_NUM_DISPLAYED_BEERS = 8;
 let prevAttrs = "abv";
-export const BEER_API_URL = "https://sandbox-api.brewerydb.com/v2/";
-export const PROXY_URL = "https://murmuring-oasis-36162.herokuapp.com/";
-// Adds Acces-Control-Allow-Origin header to the request
 
 /**
  * Creates the beer bar graph
@@ -38,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // initial beers
   const beers = Object.values(require("./beers.json")).sort(alphabeticalBeers);
 
-  // Y-axis scale
+  // Y-axis scale, adaps bar chart heights based on selected beer attribute
   const yScale = d3.scaleLinear().range([height, 0]).domain([0, 100]);
   const yAxis = beerSvg.append("g").call(d3.axisLeft(yScale));
 
@@ -222,12 +216,11 @@ const addBars = (bars, newAttrs, xScale, yScale, height, tooltip) => {
     .attr("x", (beer) => xScale(smallerBeerName(beer.name)))
     .attr("y", (beer) => {
       const beerValue = getBeerValue(beer, newAttrs.beerValue);
-      console.log(newAttrs.beerValue);
       return yScale(beerValue);
     })
     .attr("height", (beer) => {
       const beerValue = getBeerValue(beer, newAttrs.beerValue);
-      return height - yScale(beerValue);
+      return parseFloat(height - yScale(beerValue));
     })
     .attr("width", xScale.bandwidth())
     .attr("fill", "#69b3a2")
